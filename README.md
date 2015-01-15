@@ -15,8 +15,8 @@ Adding Administrators
 ========
 Either method 1 or 2 will work.
 
-1. Use the console command 'pog_add' within RCON or in-game after you've set yourself to root
-Format:
+1. Use the console command 'pog_add' within RCON or in-game after you've set yourself to root<br />
+Format:<br />
 pog_add STEAMID RankNumber
 
 
@@ -34,8 +34,8 @@ Trial Moderator - 8<br />
 
 Removing Administrators
 ========
-1. Use the console command 'pog_remove' within RCON or in-game after you've set yourself to root
-Format:
+1. Use the console command 'pog_remove' within RCON or in-game after you've set yourself to root<br />
+Format:<br />
 pog_add STEAMID
 
 
