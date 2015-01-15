@@ -22,15 +22,15 @@ pog_add STEAMID RankNumber
 
 2. Directly add an entry to the 'pog_adminTable' within your database with the correct STEAMID and rank number.
 
-Rank Numbers:
-Owner - 1
-Community President - 2
-Community Manager - 3
-Division Director - 4
-Administrator - 5
-Senior Moderator - 6
-Moderator - 7
-Trial Moderator - 8
+Rank Numbers:<br />
+Owner - 1<br />
+Community President - 2<br />
+Community Manager - 3<br />
+Division Director - 4<br />
+Administrator - 5<br />
+Senior Moderator - 6<br />
+Moderator - 7<br />
+Trial Moderator - 8<br />
 
 Removing Administrators
 ========
