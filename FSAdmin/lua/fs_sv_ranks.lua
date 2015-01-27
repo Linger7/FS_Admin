@@ -5,6 +5,11 @@ local fs_Password = "";	//Database Password
 local fs_DBName = "";	//Database Name
 
 local FS_Database = tmysql.initialize(fs_DBHost, fs_DBUserName, fs_Password, fs_DBName, "3306")
+
+function FS_Admin_DB()
+	FS_Database:Query( "CREATE TABLE IF NOT EXISTS fs_adminTable(packageid INTEGER(4) NOT NULL, user_steamid VARCHAR(25) NOT NULL)", fs_FindPlayerRank, 1, Player)
+end
+
 local function fs_FindPlayerRank(Player, results, status, error)
 	if not IsValid(Player) then return end
 	if(results[1].status) then
@@ -82,7 +87,7 @@ end)
 function fs_SetPlayerRank(Player, Value)
 	if not IsValid(Player) then return end
 	if (Value == nil) then
-		FS_Database:Query( "SELECT packageid FROM pog_adminTable WHERE packageid < 9 AND user_steamid=\'" .. Player:SteamID() .. "\';", fs_FindPlayerRank, 1, Player)
+		FS_Database:Query( "SELECT packageid FROM fs_adminTable WHERE packageid < 9 AND user_steamid=\'" .. Player:SteamID() .. "\';", fs_FindPlayerRank, 1, Player)
 		return
 	end
 	
@@ -139,7 +144,7 @@ concommand.Add("pog_add", function(Player, cmd, args, fullstring)
 			if (!file.Exists("pogadd.txt", "DATA")) then file.Write("pogadd.txt", "") end 
 			file.Append("pogadd.txt", tostring( os.date() ) .. "  " .. Player:Nick() .. " - " .. Player:SteamID() .. " ran this command: " .. fullstring .. "\n")
 
-			FS_Database:Query( "REPLACE INTO pog_adminTable VALUES(".. SQLStr(realText[2]) .. ",".. SQLStr(realText[1]).. ");", onPOGAdd, 1, Player)
+			FS_Database:Query( "REPLACE INTO fs_adminTable VALUES(".. SQLStr(realText[2]) .. ",".. SQLStr(realText[1]).. ");", onPOGAdd, 1, Player)
 		end
 	else
 		if(args[1] || args[2]) == nil then
@@ -157,7 +162,7 @@ concommand.Add("pog_add", function(Player, cmd, args, fullstring)
 			return
 		end
 	
-		FS_Database:Query( "REPLACE INTO pog_adminTable VALUES(".. SQLStr(realText[2]) .. ",".. SQLStr(realText[1]).. ");", onPOGAdd, 1)
+		FS_Database:Query( "REPLACE INTO fs_adminTable VALUES(".. SQLStr(realText[2]) .. ",".. SQLStr(realText[1]).. ");", onPOGAdd, 1)
 	end
 end)
 
@@ -173,7 +178,7 @@ concommand.Add("pog_remove", function(Player, cmd, args, fullstring)
 			if (!file.Exists("pogadd.txt", "DATA")) then file.Write("pogadd.txt", "") end 
 			file.Append("pogadd.txt", tostring( os.date() ) .. "  " .. Player:Nick() .. " - " .. Player:SteamID() .. " ran this command: " .. fullstring .. "\n")
 			
-			FS_Database:Query( "DELETE FROM pog_adminTable WHERE user_steamid =\'" .. SQLStr(fullstring, true).. "\';", onPOGRemove, 1)
+			FS_Database:Query( "DELETE FROM fs_adminTable WHERE user_steamid =\'" .. SQLStr(fullstring, true).. "\';", onPOGRemove, 1)
 		end
 	else
 		if(args[1]) == nil then
@@ -182,6 +187,6 @@ concommand.Add("pog_remove", function(Player, cmd, args, fullstring)
 			return
 		end
 	
-		FS_Database:Query( "DELETE FROM pog_adminTable WHERE user_steamid =\'" .. SQLStr(fullstring, true).. "\';", onPOGRemove, 1)
+		FS_Database:Query( "DELETE FROM fs_adminTable WHERE user_steamid =\'" .. SQLStr(fullstring, true).. "\';", onPOGRemove, 1)
 	end	
 end)

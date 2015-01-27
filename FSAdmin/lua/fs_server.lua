@@ -30,6 +30,11 @@ for _, folder in SortedPairs(folders, true) do
 	end
 end
 
+local function initializeDB()
+	FS_Admin_DB()
+end
+hook.Add("InitPostEntity", "DarkRP_LoadFonts", initializeDB)
+
 local function fs_PlayerInitialSpawn( Player )
 	fs_SetPlayerVariable(Player, "FS_Rank", 17)
 	fs_SetPlayerRank(Player)
